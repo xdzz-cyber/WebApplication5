@@ -1,0 +1,45 @@
+﻿@model IndexViewModel
+
+
+@{
+    var base_path = Context.Request.PathBase;
+}
+
+
+<main>
+    <div class="totalBasketItemsSumContainer text-center mb-5">
+        <h1 class="basketItemsTotalSumHeader">Total sum is <span class="basketItemsTotalSumShowElement"></span> $</h1>
+        <div class="d-flex justify-content-center">
+            <h3 class=""><a href="/clientItems/clientPagination/1" class="clearBasketLink btn btn-warning mt-3 me-3">Clear Basket</a></h3>
+            <h3><a href="/clientUser/clientLogin" class="submitAllItemsLink btn btn-success mt-3">Submit all items</a></h3>
+        </div>
+    </div>
+
+    <div class="row basketSingleItemContainer<?=$item['id']?> text-center">
+        <div class="singleBasketElementContainer col-md-12">
+            <h5 class="card-title">Name</h5>
+            <img class="basketSingleImage img-fluid me-3" src="@base_path/Image/img_02-11-2021-23-05-46.png" alt="single item's photo">
+
+
+            <a class="minusItemsCount1 me-2" href="/clientBasket/showBasketItems/"><i class="fa fa-minus"></i></a>
+            <input type="hidden" name="itemId" class="itemId1" value="1">
+            <input type="number" min="1" max="10" class="showBasketItemCountInput1 singleBasketCountInput form-control-sm">
+            <a class="plusItemsCount1" href=""><i class="fa fa-plus"></i></a>
+
+            <div class="d-inline-block ms-5">
+                <h5 class="basketItemPrice<?=$item['id']?> d-inline-block pe-3">50$</h5>
+                <a href="/clientUser/clientLogin" class="singleSubmitBuyButton btn btn-success">Submit buy</a>
+                <a href="/clientBasket/showBasketItems/1" class="singleDeleteBasketItemButton deleteBasketItem<?=$item['id']?> btn btn-danger ms-lg-3">Delete</a>
+            </div>
+
+        </div>
+    </div>
+   
+
+    <nav aria-label="Page navigation" class="pagination-nav basketPaginationNav">
+        <ul class="pagination justify-content-center">
+           <li class="page-item"><a class="page-link" href="#">1</a></li>
+        </ul>
+    </nav>
+
+</main>

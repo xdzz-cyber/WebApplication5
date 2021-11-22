@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Item>
+
+
+<div class="main-img">
+    <span class="title">All items</span>
+</div>
+
+<div class="container">
+
+    @foreach (var post in Model)
+    {
+        var image_path = $"/Image/{post.Photo}";
+    <li>
+        
+        <a class="post" asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">
+            <img src="@image_path" alt="post's image" />
+            <span class="title">@post.Name</span> 
+        </a>
+    </li>
+    }
+</div>

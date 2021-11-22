@@ -1,0 +1,18 @@
+﻿@model PanelIndexViewModel
+
+<h2>Admin page</h2>
+<h3>Total sum of items is @Model.totalItemsSum </h3>
+
+
+<div>
+    <ul>
+        @foreach (var item in Model.Items)
+        {
+            <li>
+                @item.Name  -
+                <a asp-controller="Panel" asp-action="EditItem" asp-route-id="@item.Id">Edit</a>
+                <a asp-controller="Panel" asp-action="RemoveItem" asp-route-id="@item.Id">Remove</a>
+            </li>
+        }
+    </ul>
+</div>

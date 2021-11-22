@@ -1,0 +1,83 @@
+﻿@model IndexViewModel
+
+
+@{
+    var base_path = Context.Request.PathBase;
+}
+
+<div class="main-img">
+    <span class="title">Transportation site</span>
+</div>
+
+
+
+<div class="index-container">
+
+    <aside class="index-aside">
+        <article class="index-article">
+            <section>
+                <header>Categories</header>
+                <ul>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <li><a asp-controller="Home" asp-action="Index" asp-route-categoryId="@category.Id">@category.Name</a></li>
+                    }
+                </ul>
+            </section>
+
+            <section>
+                <header>Filters</header>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Price range</span>
+                    <input type="number" class="price-range-input form-control" placeholder="Min price" aria-label="Min price" aria-describedby="basic-addon1"> -
+                    <input type="number" class="price-range-input form-control" placeholder="Max price" aria-label="Max price" aria-describedby="basic-addon1">
+                </div>
+            </section>
+
+        </article>
+
+    </aside>
+
+    <div class="album_index album py-5">
+        <div class="container">
+
+            <div class="item_index_info row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                @foreach (var item in Model.Items)
+                {
+                    var image_path = $"{base_path}/Image/{item.Photo}";
+
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <a asp-action="Item" asp-controller="Home" asp-route-id="@item.Id"><svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="book" preserveAspectRatio="xMidYMid slice" focusable="false"><title>@item.Name</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">@item.Name</text></svg></a>
+
+                            <div class="card-body">
+                                <p class="card-text">@item.Description</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a href="" class="btn btn-sm btn-success">Add to basket</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+
+    </div>
+
+    
+</div>
+<nav class="pagination-nav">
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+</nav>
+
+
