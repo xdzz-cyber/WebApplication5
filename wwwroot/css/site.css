@@ -159,3 +159,27 @@ padding: 15px;
 .comment-section{
     margin-top: 2%;
 }
+
+/**/
+
+.three-dots{
+    font-size: 24px;
+}
+
+.sign-in-form, .login-form{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+    .sign-in-form div, .login-form div{
+        max-width: 200px;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+.loginHeader, .registerHeader{
+    margin: 1%;
+}

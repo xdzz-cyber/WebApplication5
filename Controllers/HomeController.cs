@@ -10,6 +10,7 @@ using WebApplication5.Data.Repository;
 using WebApplication5.Data.FileManager;
 using WebApplication5.ViewModels;
 using WebApplication5.Models.Comments;
+using WebApplication5.Helpers;
 
 namespace WebApplication5.Controllers
 {
@@ -25,15 +26,26 @@ namespace WebApplication5.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(int? categoryId)
+        public IActionResult Index(int pageNumber, int? categoryId)
         {
-            var items = categoryId == null ? _repo.GetAllItems() : _repo.GetAllItems().Where(item => item.CategoryId == categoryId);
+            if(_repo.CanGoToNextPage(pageNumber, categoryId))
+            {
+                return RedirectToAction("Index", new { pageNumber = 1, categoryId });
+            }
+
+            //var items = categoryId == null ? _repo.GetAllItems(pageNumber) : _repo.GetAllItems(pageNumber).Where(item => item.CategoryId == categoryId);
+            var items = _repo.GetAllItems(pageNumber, categoryId);
             var categories = _repo.GetAllCategories();
 
             var IndexViewModelItem = new IndexViewModel
             {
                 Items = items,
-                Categories = categories
+                Categories = categories,
+                PageNumber = pageNumber,
+                PagesCount = _repo.GetPagesCount(categoryId),
+                ItemsCount = _repo.GetItemsCount(categoryId),
+                CategoryId = categoryId,
+                OptimizedPaginationPages = PageHelper.optimizedPageNumbers(pageNumber, _repo.GetPagesCount(categoryId)).ToList() //_repo.optimizedPageNumbers(pageNumber, _repo.GetPagesCount(categoryId)).ToList()
             };
 
             return View(IndexViewModelItem);

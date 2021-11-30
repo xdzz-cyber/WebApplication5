@@ -3,7 +3,13 @@
 
 @{
     var base_path = Context.Request.PathBase;
+    var prevPageNumber = Model.PageNumber - 1;
+    var nextPageNumber = Model.PageNumber + 1;
+    var categoryId = Model.CategoryId;
+
+
 }
+
 
 <div class="main-img">
     <span class="title">Transportation site</span>
@@ -70,14 +76,7 @@
 
     
 </div>
-<nav class="pagination-nav">
-    <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-    </ul>
-</nav>
+
+<partial name="_optimizedPagination" model="Model"/>
 
 

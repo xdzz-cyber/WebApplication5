@@ -2,9 +2,11 @@
 
 @{ }
 
+<div class="text-center loginHeader">
+    <h1>Login</h1>
+</div>
 
-<h1>Login</h1>
-<form method="post" asp-action="Login" asp-controller="Auth">
+<form class="sign-in-form" method="post" asp-action="Login" asp-controller="Auth">
     <div>
         <label>Username</label>
         <input asp-for="Username" />
@@ -13,5 +15,7 @@
         <label>Password</label>
         <input asp-for="Password"/>
     </div>
-    <input type="submit" value="Sign in"/> 
+    <div>
+        <input type="submit" value="Sign in" />
+    </div>
 </form>

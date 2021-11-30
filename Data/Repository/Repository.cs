@@ -13,11 +13,15 @@ namespace WebApplication5.Data.Repository
     {
 
         private AppDbContext _ctx;
+        private int pageSize = 1;
 
         public Repository(AppDbContext ctx)
         {
             _ctx = ctx;
         }
+
+
+        
 
 
         public async Task<bool> SaveChangesAsync()
@@ -42,6 +46,13 @@ namespace WebApplication5.Data.Repository
         {
             var items = _ctx.Items.ToList();
             return items;
+        }
+
+        public List<Item> GetAllItems(int pageNumber, int? categoryId)
+        {
+            //double pagesCount = GetPagesCount();
+            var items = GetAllItemsWithoutPagination(categoryId);
+            return items.Skip(pageSize * (pageNumber - 1)).Take(pageSize).ToList();
         }
 
         public void AddItem(Item item)
@@ -89,6 +100,32 @@ namespace WebApplication5.Data.Repository
         public void AddSubComment(SubComment comment)
         {
             _ctx.SubComments.Add(comment);
+        }
+
+        public double GetPagesCount(int? categoryId)
+        {
+            var items = GetAllItemsWithoutPagination(categoryId);
+            return Math.Ceiling((double)items.Count() / (double)pageSize);
+        }
+
+        public int GetItemsCount(int? categoryId)
+        {
+            return GetAllItemsWithoutPagination(categoryId).Count();
+        }
+
+        public int GetItemsPerPageCount()
+        {
+            return pageSize;
+        }
+
+        public bool CanGoToNextPage(int pageNumber, int? categoryId)
+        {
+            return pageNumber < 1 || (pageNumber - 1) * GetItemsPerPageCount() > GetItemsCount(categoryId);
+        }
+
+        public List<Item> GetAllItemsWithoutPagination(int? categoryId)
+        {
+            return categoryId == null ? _ctx.Items.ToList() : _ctx.Items.Where(el => el.CategoryId == categoryId).ToList();
         }
     }
 }

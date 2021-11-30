@@ -12,5 +12,10 @@ namespace WebApplication5.ViewModels
     {
         public IEnumerable<Item> Items{ get; set; }
         public IEnumerable<Category> Categories { get; set; }
+        public IEnumerable<double> OptimizedPaginationPages{ get; set; }
+        public int PageNumber { get; set; }
+        public double PagesCount { get; set; }
+        public double ItemsCount { get; set; }
+        public int? CategoryId{ get; set; }
     }
 }

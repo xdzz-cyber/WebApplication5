@@ -1,15 +1,35 @@
-﻿@model LoginViewModel
+﻿@model RegisterViewModel
 
 @{ }
-<h1>Register</h1>
-<form method="post" asp-action="Login" asp-controller="Auth">
+
+<div class="text-center registerHeader">
+    <h1>Register</h1>
+</div>
+
+<form class="login-form" method="post" asp-action="Register" asp-controller="Auth">
     <div>
         <label>Username</label>
         <input asp-for="Username" />
     </div>
     <div>
-        <label>Password</label>
-        <input asp-for="Password"/>
+        <label>Email</label>
+        <input asp-for="Email" />
     </div>
-    <input type="submit" value="Sign in"/> 
+    <div>
+        <label>Address</label>
+        <input asp-for="Address" />
+    </div>
+    <div>
+        <label>Note</label>
+        <input asp-for="Note" />
+    </div>
+    <div>
+        <label>Password</label>
+        <input asp-for="Password" />
+    </div>
+    <div>
+        <label>Password Confirmation</label>
+        <input asp-for="ConfirmPassword" />
+    </div>
+    <input type="submit" value="Register" />
 </form>
