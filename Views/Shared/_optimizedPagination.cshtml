@@ -1,0 +1,39 @@
+﻿@model IndexViewModel
+
+
+@{
+    var base_path = Context.Request.PathBase;
+    var prevPageNumber = Model.PageNumber - 1;
+    var nextPageNumber = Model.PageNumber + 1;
+    var categoryId = Model.CategoryId;
+}
+
+<nav class="pagination-nav">
+    <ul class="pagination">
+        @if (Model.PageNumber > 1)
+        {
+            <li class="page-item"><a class="page-link" asp-action="Index" asp-controller="Home" asp-route-pageNumber="@prevPageNumber" asp-route-categoryId="@categoryId">Previous</a></li>
+        }
+
+        @foreach (var i in Model.OptimizedPaginationPages)
+        {
+            @if (i == -1)
+            {
+                <li class="page-item">
+                    <span class="three-dots">...</span>
+                </li>
+            }
+            else
+            {
+                <li class="@(Model.PageNumber == i ? "page-item active" : "page-item")"><a class="page-link" asp-action="Index" asp-controller="Home" asp-route-pageNumber="@i" asp-route-categoryId="@categoryId">@i</a></li>
+            }
+
+        }
+
+        @if (Model.PageNumber < Model.OptimizedPaginationPages.Count())
+        {
+            <li class="page-item"><a class="page-link" asp-action="Index" asp-controller="Home" asp-route-pageNumber="@nextPageNumber" asp-route-categoryId="@categoryId">Next</a></li>
+        }
+
+    </ul>
+</nav>
